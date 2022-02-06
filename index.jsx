@@ -133,7 +133,7 @@ function App () {
         <Fragment>
             <div className="search-form">
             <form onSubmit={event => {
-            doFetch(`http://openlibrary.org/search.json?q=${query}`);
+            doFetch(`https://openlibrary.org/search.json?q=${query}`);
 
             event.preventDefault()
              }}>
