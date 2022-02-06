@@ -1,0 +1,59 @@
+ul {
+    list-style-type: none;
+}
+li {
+    margin-left: -20px;
+    margin-top: 15px;
+}
+h1 {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: white;
+    background-color: rgb(75, 107, 128);
+    padding: 10px;
+}
+
+h2 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:rgb(75, 107, 128)
+}
+
+h4 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:rgb(100, 112, 121)
+}
+.search-field {
+    margin-left: 10px;
+    margin-top: 12px;
+    margin-right: 10px;
+    border-radius: 15px;
+    border-style: none;
+    height: 30px;
+}
+
+.search-button {
+    border-radius: 15px;
+    border-style: none;
+    height: 30px;
+}
+
+
+
+#root {
+    margin-top: -10px;
+}
+
+.search-form {
+    padding: 10px;
+    background-color: rgb(95, 135, 161);
+}
+
+.book-card {
+    display: grid;
+    grid-template-columns: 200px 400px;
+    background-color: rgb(210, 233, 248);
+    padding: 10px;
+    border-radius: 10px;
+    width: 600px;
+    box-shadow: 5px 5px 3px rgb(171, 178, 185);
+    
+}
