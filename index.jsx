@@ -116,7 +116,7 @@ function App () {
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 10;
     const [{ data, isLoading, isError }, doFetch] = useDataApi(
-        "http://openlibrary.org/search.json?q=gregory+josephs",
+        "https://openlibrary.org/search.json?q=gregory+josephs",
         {
             docs: []
         }
