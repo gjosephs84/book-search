@@ -29,6 +29,7 @@ const Pagination = ({ items, pageSize, onPageChange }) => {
     return page;
   }
 
+// This variable allows me to see inside what is getting fetched so I can look at its structure in the console.
 let theData;
 
 const useDataApi = (initialUrl, initialData) => {
@@ -41,13 +42,17 @@ const useDataApi = (initialUrl, initialData) => {
         data: initialData
     });
 
+    // The useEffect causes data to be fetched when the search form is triggered, using various dispatches
     useEffect(() => {
         let didCancel = false;
+        // The funtion that actually fetches the data
         const fetchData = async () => {
-            dispatch({ type: "FETCH_INIT"});
+            dispatch({ type: "FETCH_INIT"}); // Causes the conditional loading div to appear while fetching
             try {
+                // Here is where we are catching the data before committing it to state
                 const result = await axios(url);
                 if (!didCancel) {
+                    // When successful, dispatch FETCH_SUCCESS
                     dispatch({ type: "FETCH_SUCCESS", payload: result.data});
                     console.log("Success");
                     console.log(result.data.docs);
@@ -68,6 +73,7 @@ const useDataApi = (initialUrl, initialData) => {
     return [state, setUrl];
 };
 
+// The following defines the actions of the dispatches given different cases
 const dataFetchReducer = (state, action) => {
     switch (action.type) {
         case "FETCH_INIT":
@@ -81,7 +87,7 @@ const dataFetchReducer = (state, action) => {
                 ...state,
                 isLoading: false,
                 isError: false,
-                data: action.payload
+                data: action.payload // set the state of data the be the fetched results
             };
             
         case "FETCH_FAILURE":
@@ -94,11 +100,13 @@ const dataFetchReducer = (state, action) => {
             throw new Error();
     }
 };
-//A function to hopefully do cover art
+//A function to retrieve cover art when available
 function Cover (isbns) {
+    // If no isbn is available (required for the cover art link), return
     if (!isbns.isbns) {
         return null;
     }
+    // When an isbn IS available, grab only the first one in the case of multiple isbns (which is likely)
     let firstIsbn = isbns.isbns[0];
     return (
         <div>
@@ -112,18 +120,24 @@ function Cover (isbns) {
 //The App that renders into the REACT DOM
 function App () {
     const {Fragment, useState, useEffect, useReducer } = React;
-    const [query, setQuery] = useState("Gregory Josephs");
-    const [currentPage, setCurrentPage] = useState(1);
+    // The state variables for the search bar
+    const [query, setQuery] = useState("Gregory Josephs"); 
+    // The state variables for the pagination
+    const [currentPage, setCurrentPage] = useState(1); 
     const pageSize = 10;
+    // Here we're doing the initial fetch on the first render
+    // docs is, according to Open Library, where all the data I want from the fetch is stored within the retrieved object
     const [{ data, isLoading, isError }, doFetch] = useDataApi(
         "https://openlibrary.org/search.json?q=gregory+josephs",
         {
             docs: []
         }
     );
+    // The function that handles the page change when buttons at the bottom of the page are clicked
     const handlePageChange = e => {
         setCurrentPage(Number(e.target.textContent));
       };
+      // Grabbing the data (in docs) so it  can be passed to the paginate function to render out the corresponding page
       let page = data.docs;
       if (page.length >= 1) {
         page = paginate(page, currentPage, pageSize);
@@ -141,8 +155,9 @@ function App () {
             <button className="search-button" type="submit">Search</button>
             </form>
             </div>
+        {/* Conditional div to show when there is an error */}
         {isError && <div>Something went wrong ...</div>}
-
+        {/* Conditional div to show when data is still fetching */}
         {isLoading ? (
             <div>Loading ...</div>
         ) : (
