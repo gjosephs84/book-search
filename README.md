@@ -18,3 +18,6 @@ To run it on your local machine, clone/download the repository. CD into the repo
 
 ## Roadmap of Future Improvements
 No improvement are planned at this time. However, potential improvements include displaying ISBN and publication information such as publication date and publisher. I may also eventually add external links to the books.
+
+## License
+This software is licensed MIT. See license for more information.
