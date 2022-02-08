@@ -117,13 +117,43 @@ function Cover (isbns) {
 
 //A function to return titles
 function Title (titles) {
-    console.log(titles);
     return (
         <h2>
             {titles.titles}
         </h2>
     );
 };
+
+//A function to return authors
+function Authors (authors) {
+    return (
+        <div>
+        <h4>Authors:</h4>
+        {authors.authors.map(authors => {
+            return (
+            <h4 key={authors}>{authors}</h4>
+            )
+        })}
+        </div>
+    )
+};
+
+//A function to return ISBNS:
+function Isbns (isbns) {
+    if (!isbns.isbns) {
+        return null;
+    }
+    return (
+        <div>
+            <p className="isbns">ISBNs:</p>
+            {isbns.isbns.map(isbn => {
+                return (
+                    <p key={isbn} className="isbns">{isbn}</p>
+                )
+            })}
+        </div>
+    )
+}
 
 
 
@@ -180,9 +210,8 @@ function App () {
                 </div>
                 <div>
                     <Title titles={item.title}/>
-                    {item.author_name.map(author => (
-                        <h4 key={author.key}>{author}</h4>
-                    ))}
+                    <Authors authors={item.author_name}/>
+                    <Isbns isbns={item.isbn}/>
                 </div>
               </div>
             </li>
