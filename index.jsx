@@ -115,6 +115,16 @@ function Cover (isbns) {
     )
 };
 
+//A function to return titles
+function Title (titles) {
+    console.log(titles);
+    return (
+        <h2>
+            {titles.titles}
+        </h2>
+    );
+};
+
 
 
 //The App that renders into the REACT DOM
@@ -169,7 +179,7 @@ function App () {
                 <Cover isbns={item.isbn}/>
                 </div>
                 <div>
-                    <h2>{item.title}</h2>
+                    <Title titles={item.title}/>
                     {item.author_name.map(author => (
                         <h4 key={author.key}>{author}</h4>
                     ))}
